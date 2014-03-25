@@ -1,0 +1,200 @@
+\documentclass[a4paper, 12pt, twoside, openright]{article}
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage[frenchb]{babel}
+\usepackage{fancyhdr}
+\usepackage[final]{graphicx}%@@final
+\usepackage{a4wide}
+\usepackage{float}
+\usepackage{palatino}
+\usepackage{rotating}
+\usepackage{alltt}
+\usepackage{hyperref}
+\usepackage{amsmath}
+\usepackage{listings}
+\usepackage{color}
+
+\definecolor{Ccommentaire}{RGB}{100,135,220}
+\definecolor{Cfond}{RGB}{219,246,255}
+\definecolor{Ctype}{RGB}{220,0,0}
+\definecolor{Cinclude}{RGB}{0,163,0}
+\definecolor{Cend}{RGB}{200,0,200}
+\definecolor{Cfunc}{RGB}{255,197,0}
+\definecolor{Cloop}{RGB}{0,0,255}
+
+\hypersetup{colorlinks,%
+citecolor=black,%
+filecolor=black,%
+linkcolor=black,%
+urlcolor=blue}
+
+\pagestyle{fancyplain}
+\fancyhead[RE,CE,LE,RO,CO,LO]{}
+\fancyfoot[RE,CE,LE,RO,CO,LO]{}
+\fancyhead[LE,RO]{\emph{\leftmark}}
+\fancyfoot[LE,RO]{Page \thepage}
+
+\renewcommand{\plainfootrulewidth}{0.4pt}
+\renewcommand{\footrulewidth}{0.4pt}
+\renewcommand{\headrulewidth}{0.4pt}
+\renewcommand{\plainheadrulewidth}{0.4pt}
+
+\setlength{\headheight}{20pt} %otherwise there are warnings
+\setlength{\parskip}{8pt}
+
+\widowpenalty=10000
+\clubpenalty=10000
+\raggedbottom
+
+\newcommand{\img}[3][15]{
+\begin{figure}[H]
+\begin{center}\includegraphics[width= #1 cm]{#2}\end{center}
+\caption{#3}
+\label{#2}
+\end{figure}
+}
+
+\newcommand{\code}[2]{
+	\lstinputlisting[title = {#2}]{#1}
+}
+
+
+\newcommand{\centrer}[1]{\begin{center}#1\end{center}}
+
+\lstset{tabsize=4,
+firstnumber=0, numbers=left, numberstyle=\tiny, numbersep=5pt, stepnumber=5,
+breaklines=true, extendedchars=false,
+frame=single, backgroundcolor=\color{Cfond},framerule=1pt,
+	classoffset=0,morekeywords={int, char, long, short, unsigned, void},keywordstyle=\color{Ctype},
+	classoffset=1,morekeywords={typedef, struct},keywordstyle=\textbf,
+	classoffset=2,morekeywords={for, while, do},keywordstyle=\color{Cloop},
+	classoffset=3,morekeywords={return, exit},keywordstyle=\color{Cend},
+	classoffset=4,morekeywords={printf, fprintf, sprintf, snprintf, scanf, fscanf},keywordstyle=\color{Cfunc},
+	classoffset=5,
+	morecomment=[l][\color{Cinclude}]{\#include},
+	morecomment=[l][\color{Cinclude}]{\#define},
+	morecomment=[s][\color{Ccommentaire}]{/*}{*/}
+}
+
+\author {trax Omar \bsc{Givernaud}}
+\title{How to bebin an open source software development project}
+
+
+\begin{document}
+\maketitle
+\thispagestyle{empty}
+\clearpage
+\tableofcontents{}
+\thispagestyle{empty}
+\clearpage
+
+  \section{Tools}
+
+  \subsection{Mandatory}
+  \subsubsection{Source Content Management}
+
+  \paragraph{Why}
+
+  A good scm allow you to: 
+  \begin{itemize}
+    \item Save your work and rollback easily
+    \item Keep trace of what you did, and how.
+    \item Implement features easily: branch, 
+      so you don't break your project during development, and you can still commit.
+    \item Share, and work together.
+    \item 
+  \end{itemize}
+
+  <h6>What</h6>
+
+  \begin{itemize}\item git or GTFO\end{itemize}
+
+  \subsubsection{Tickets}
+
+  \paragraph{Why}
+
+  \begin{itemize}
+    \item For bug reports.
+    \item For feature request.
+    \item As a todo list/backlog.
+  \end{itemize}
+
+  \paragraph{What}
+  \begin{itemize}
+    \item Redmine/chiliproject
+    \item Jira
+    \item Avoid trac if your project contains subprojects
+  \end{itemize}
+
+
+  \subsubsection{Unit test framework}
+  \paragraph{Why}
+
+  Unit test are awesome for:
+  \begin{itemize}
+    \item Debugging.
+    \item Avoid regressions.
+    \item They give nice examples of how to use your code.
+  \end{itemize}
+  
+
+  \subsubsection{Packager}
+
+  \paragraph{Why}
+
+  If you want your project to work you need to make it easy to test. 
+  One way is to package it nicely. 
+
+  \paragraph{What}
+  If your whatever language, framework, does not provide it:
+  \begin{itemize}
+    \item cpack (which can be used without cmake)
+    \item fpm
+    \item Be a man and right your own rules/specs/ebuild
+  \end{itemize}
+
+
+  \subsection{Nice to have}
+
+  \subsubsection{Continuous integration automate}
+
+  \paragraph{Why}
+
+  \begin{itemize}
+    \item It nice that it works on your computer, but it is better if it works on main targets (provides a packages for each target).
+    \item Runs all the tools bellow in background.
+  \end{itemize}
+  
+
+  \paragraph{What}
+  \begin{itemize}
+    \item Jenkins
+    \item gitlab-ci
+    \item buildbot
+  \end{itemize}
+
+
+  \subsubsection{Static analyser }
+  \paragraph{Why}
+  
+  Efficient quality checking and nice advice at a low price. What's else?
+
+  \paragraph{What}
+
+  \begin{itemize}
+    \item clang/gcc
+    \item cppcheck/clint
+    \item sonar
+  \end{itemize}
+
+  \subsubsection{Runtime analyser}
+
+  
+
+  \subsubsection{I18n}
+  \subsubsection{Website}
+  \subsubsection{Documentation tools}
+  
+
+
+\end{document}
